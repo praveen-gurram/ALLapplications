@@ -1,0 +1,30 @@
+
+
+CREATE COMPUTE MODULE TREES_JSON_MF_Compute1
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+	        CALL CopyEntireMessage();
+		RETURN TRUE;
+	END;
+
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		DECLARE var REFERENCE TO InputRoot.DFDL.task1234.record;
+		DECLARE var1,var3 INTEGER;
+		DECLARE var2,var4 DECIMAL;
+		SET var1 = CAST(var.field1 AS INTEGER);
+		SET var3 = CAST(var.field3 AS INTEGER);
+		SET var2 = CAST(var.field2 AS DECIMAL);
+		SET var4 = CAST(var.field4 AS DECIMAL);
+		SET OutputRoot.XMLNSC.Result.NO= var1;
+		SET OutputRoot.XMLNSC.Result.GIRTH = var2;
+		SET OutputRoot.XMLNSC.Result.HEIGHT = var3;
+	    SET OutputRoot.XMLNSC.Result.VOLUME =var4;
+		
+	INSERT INTO DataSource.TREES1(NO,GIRTH,HEIGHT,VOLUME )VALUES(var1,var2,var3,var4);
+		
+		
+	
+	END;
+END MODULE;
