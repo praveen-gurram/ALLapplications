@@ -1,0 +1,52 @@
+
+
+CREATE COMPUTE MODULE trees_details1InputFailureHandler_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		 CALL CopyEntireMessage();
+		RETURN TRUE;
+	END;
+
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+	DECLARE ERROR_TEXT,ERROR_TYPE,FILE_NAME CHARACTER;
+		
+	DECLARE TIME_STAMP TIMESTAMP;
+	
+	   
+	    SET TIME_STAMP = CURRENT_TIMESTAMP;
+		
+		DECLARE ref REFERENCE TO InputExceptionList.*[1];
+		
+		While LASTMOVE (ref) DO
+			
+		IF ref.Type IS NOT NULL THEN
+				
+	    SET ERROR_TEXT = ref.Text;
+	    
+	   set OutputRoot.XMLNSC.ece.txt = ERROR_TEXT;
+	    
+	    
+	    SET ERROR_TYPE = ref.Type;
+	    
+	    set OutputRoot.XMLNSC.ece.type = ERROR_TYPE;
+	    
+	    SET TIME_STAMP = TIME_STAMP;
+	    
+	
+	    
+		END IF;
+		
+		MOVE ref LASTCHILD;
+		
+		END WHILE;
+           CALL PROCEDURES12327(ERROR_TEXT,ERROR_TYPE,TIME_STAMP);
+	 
+	 
+          
+	END;
+END MODULE;
+CREATE PROCEDURE PROCEDURES12327(IN ERROR_TEXT CHARACTER,IN ERROR_TYPE CHARACTER,IN TIME_STAMP TIMESTAMP)
+LANGUAGE DATABASE
+EXTERNAL NAME "ERROR_LOGWEBSERVICE";

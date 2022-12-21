@@ -1,0 +1,93 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "title" : "trees_details1",
+    "version" : "1.0.0",
+    "description" : "trees_details1"
+  },
+  "paths" : {
+    "/NOservice" : {
+      "get" : {
+        "operationId" : "getNOservice",
+        "responses" : {
+          "200" : {
+            "description" : "The operation was successful.",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        },
+        "produces" : [ "application/json" ],
+        "description" : "Retrieve NOservice",
+        "parameters" : [ {
+          "name" : "NO",
+          "in" : "query",
+          "type" : "string",
+          "required" : false
+        } ]
+      }
+    },
+    "/GIRTH" : {
+      "get" : {
+        "operationId" : "getGIRTH",
+        "responses" : {
+          "200" : {
+            "description" : "The operation was successful.",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        },
+        "produces" : [ "application/json" ],
+        "description" : "Retrieve GIRTH",
+        "parameters" : [ {
+          "name" : "GIRTH",
+          "in" : "query",
+          "type" : "string"
+        } ]
+      }
+    },
+    "/HEIGHT" : {
+      "get" : {
+        "operationId" : "getHEIGHT",
+        "responses" : {
+          "200" : {
+            "description" : "The operation was successful.",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        },
+        "produces" : [ "application/json" ],
+        "description" : "Retrieve HEIGHT",
+        "parameters" : [ {
+          "name" : "HEIGHT",
+          "in" : "query",
+          "type" : "string"
+        } ]
+      }
+    },
+    "/VOLUME" : {
+      "get" : {
+        "operationId" : "getVOLUME",
+        "responses" : {
+          "200" : {
+            "description" : "The operation was successful.",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        },
+        "produces" : [ "application/json" ],
+        "description" : "Retrieve VOLUME",
+        "parameters" : [ {
+          "name" : "VOLUME",
+          "in" : "query",
+          "type" : "string",
+          "required" : false
+        } ]
+      }
+    }
+  },
+  "basePath" : "/trees_details1/v1"
+}
