@@ -1,0 +1,22 @@
+
+
+Importing file: C:\Users\Sreenivas Bandaru\IBM\ACET12\workspace\TREES_DETAILS_SOAPSERVICES\TREES_DETAILS.wsdl
+
+The WSDL import will proceed with bindings TREES_DETAILSSOAP.
+Creating wsdl schema document for file:///C:/Users/Sreenivas Bandaru/IBM/ACET12/workspace/TREES_DETAILS_SOAPSERVICES/TREES_DETAILS.wsdl.
+Parsing wsdl binding {http://www.example.org/TREES_DETAILS/}TREES_DETAILSSOAP.
+Parsing wsdl binding input NewOperation.
+Parsing wsdl binding output NewOperation.
+Processing doc style for operation NewOperation.
+Populating WSDL schema TREES_DETAILS.xsd.
+Creating file TREES_DETAILS.xsd in the workspace.
+Creating file TREES_DETAILS_InlineSchema1.xsd in the workspace.
+Copying source WSDL TREES_DETAILS.wsdl to TREES_DETAILS.wsdl.
+
+Elapsed time processing this message definition file: 0.88 seconds
+Number of warnings for this message definition file: 0
+
+
+Number of files processed: 1
+
+
