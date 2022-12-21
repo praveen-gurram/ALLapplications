@@ -1,0 +1,53 @@
+
+
+CREATE COMPUTE MODULE while_loop_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		 CALL CopyEntireMessage();
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+--	DECLARE inref REFERENCE TO InputRoot.XMLNSC.EmpDetails;
+--	DECLARE EmpCount INTEGER CARDINALITY(inref.Emp[]);
+--	DECLARE i INTEGER 1;
+--	WHILE (i<=EmpCount)DO
+--		CREATE LASTCHILD OF OutputRoot.XMLNSC.EmpDetails_Out NAME 'Emp_Out';
+--		DECLARE outref REFERENCE TO OutputRoot.XMLNSC.EmpDetails_Out.Emp_Out;
+--		MOVE outref TO OutputRoot.XMLNSC.EmpDetails_Out.[<];
+--     	SET outref.Emp_Out[i].EmpID_Out = inref.Emp[i].EmpID;
+--		SET outref.Emp_Out[i].Name_Out = inref.Emp[i].Name;
+--	    SET outref.Emp_Out[i].Department_Out = inref.Emp[i].Department;
+--	    SET outref.Emp_Out[i].Age_Out = inref.Emp[i].Age;
+--		
+--		SET i=i+1;
+--		
+--	END WHILE;
+DECLARE inref REFERENCE TO InputRoot.XMLNSC.EmpDetails.Emp;
+DECLARE i INTEGER 1;
+WHILE LASTMOVE(inref) DO
+		CREATE LASTCHILD OF OutputRoot.XMLNSC.EmpDetails_Out NAME 'Emp_Out';
+		DECLARE outref REFERENCE TO OutputRoot.XMLNSC.EmpDetails_Out.Emp_Out;
+		MOVE outref TO OutputRoot.XMLNSC.EmpDetails_Out.[<];
+     	SET outref.EmpID_Out = inref.EmpID;
+		SET outref.Name_Out = inref.Name;
+	    SET outref.Department_Out = inref.Department;
+	    SET outref.Age_Out = inref.Age;
+	    
+	    MOVE inref PREVIOUSSIBLING;
+		
+	SET i =i+1;
+END WHILE;
+	END;
+END MODULE;
