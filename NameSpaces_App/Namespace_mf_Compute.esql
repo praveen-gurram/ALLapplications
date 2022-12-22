@@ -1,0 +1,27 @@
+
+
+DECLARE f NAMESPACE 'https://xyz.com/furniture';
+
+
+CREATE COMPUTE MODULE Namespace_mf_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+DECLARE inref REFERENCE TO InputRoot.XMLNSC.details;
+  
+  DECLARE outref REFERENCE TO  OutputRoot;
+  
+ CREATE LASTCHILD OF OutputRoot.XMLNSC.details as outref NAMESPACE f name 'table';
+ 
+    SET outref.XMLNSC.(XMLNSC.NamespaceDecl)xmlns:f = f;
+ 
+    SET outref.f:name = 'hii';
+    
+    SET outref.f:length = '900';
+        
+    SET outref.f:breadth = '200';
+  
+	
+		RETURN TRUE;
+		
+	END;
+	END MODULE;
