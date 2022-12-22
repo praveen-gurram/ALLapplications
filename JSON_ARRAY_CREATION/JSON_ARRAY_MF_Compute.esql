@@ -1,0 +1,42 @@
+
+
+CREATE COMPUTE MODULE JSON_ARRAY_MF_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		 CALL CopyEntireMessage();
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		
+           SET OutputRoot.JSON.Data.DealID = '3-333771862';
+                    
+          CREATE FIELD OutputRoot.JSON.Data.PartyID IDENTITY(JSON.Array)PartyID;
+                       
+                        
+		 SET OutputRoot.JSON.Data.PartyID.Item[1].PartyIDLists='10114969';
+		 SET OutputRoot.JSON.Data.PartyID.Item[1].ApplicationToFull='1';
+		 
+         SET OutputRoot.JSON.Data.PartyID.Item[2].PartyIDLists='10114779';
+		 SET OutputRoot.JSON.Data.PartyID.Item[2].ApplicationToFull='2';
+		
+		 SET OutputRoot.JSON.Data.PartyID.Item[3].PartyIDLists='10114604';
+		 SET OutputRoot.JSON.Data.PartyID.Item[3].ApplicationToFull='3';
+                    
+                    
+         SET OutputRoot.JSON.Data.EMPID = '3';
+                    
+
+	END;
+END MODULE;
