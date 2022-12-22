@@ -1,0 +1,35 @@
+BROKER SCHEMA com.praveen
+
+
+CREATE COMPUTE MODULE How_To_Enable_Console_Log_mf_Compute
+CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		 CALL CopyEntireMessage();
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		
+		DECLARE ref REFERENCE TO InputRoot.XMLNSC;
+		
+		--SET OutputRoot = InputRoot;
+		
+		LOG EVENT SEVERITY 1 CATALOG 'BIPmsgs' MESSAGE 3001 VALUES(ref);
+		
+		DECLARE sap CHARACTER 'select * from EMP';
+		
+		SET OutputRoot.XMLNSC.result = PASSTHRU (sap);
+		
+	END;
+END MODULE;
